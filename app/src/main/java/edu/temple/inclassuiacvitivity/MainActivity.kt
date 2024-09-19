@@ -1,8 +1,10 @@
 package edu.temple.inclassuiacvitivity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebSettings.TextSize
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 
@@ -21,14 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         with (spinner) {
             /* Step 2: Create adapter to display items from array in Spinner */
-            adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, numberArray)
+            adapter = TextSizeAdapter(this@MainActivity, numberArray)
 
 
             // Step 3: Change TextView's text size to the number selected in the Spinner */
             onItemSelectedListener = object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     parent?.run {
-                        displayTextView.textSize = getItemAtPosition(position).toString().toFloat()
+                        // displayTextView.textSize = getItemAtPosition(position).toString().toFloat()
+                        val selectedSize = numberArray[position].toFloat()
+                        displayTextView.textSize = selectedSize
                     }
                 }
 
